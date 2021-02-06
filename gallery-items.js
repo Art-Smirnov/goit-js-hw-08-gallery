@@ -1,4 +1,4 @@
-const images = [
+export default [
   {
     preview: "https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825__340.jpg",
     original: "https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825_1280.jpg",
@@ -44,31 +44,4 @@ const images = [
     original: "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg",
     description: "Lighthouse Coast Sea",
   },
-]
-
-const galleryContainer = document.querySelector(".js-gallery")
-
-const galleryMarkup = createGalleryMarkup(images)
-galleryContainer.insertAdjacentHTML("beforeend", galleryContainer)
-console.log(galleryContainer)
-
-function createGalleryMarkup(images) {
-  return images
-    .map(
-      ({ preview, original, description }) =>
-        `<li class="gallery__item">
-  <a
-    class="gallery__link"
-    href="${original}"
-  >
-    <img
-      class="gallery__image"
-      src="${preview}"
-      data-source="${original}"
-      alt="${description}"
-    />
-  </a>
-</li>`
-    )
-    .join("")
-}
+];
