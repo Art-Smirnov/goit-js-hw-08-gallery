@@ -13,9 +13,9 @@ galleryContainer.innerHTML = galleryMarkup;
 
 galleryContainer.addEventListener("click", onImageClick);
 coseModalBtn.addEventListener("click", onCloseModal);
-overlay.addEventListener("click", onCloseModal);
-document.addEventListener("keydown", OnEscapePress);
-// document.addEventListener("keydown", OnArrowRightPress);
+overlay.addEventListener("click", onOverlayClick);
+
+// document.addEventListener("keydown", onArrowRightPress);
 
 function createGalleryMarkup(images) {
   return images
@@ -42,8 +42,9 @@ function onImageClick(e) {
   e.preventDefault();
   let image = e.target;
 
-  document.addEventListener("keydown", OnArrowLeftPress);
-  document.addEventListener("keydown", OnArrowRightPress);
+  window.addEventListener("keydown", onEscapePress);
+  document.addEventListener("keydown", onArrowLeftPress);
+  document.addEventListener("keydown", onArrowRightPress);
   // console.log(typeof currentIndex);
   if (!image.classList.contains("gallery__image")) {
     return;
@@ -54,9 +55,9 @@ function onImageClick(e) {
   setImageAlt(image);
 
   // console.log(currentIndex);
-  function OnArrowRightPress(evt) {
+  function onArrowRightPress(evt) {
     // setRightBtnDataIndex(currentIndex);
-    if (evt.key === "ArrowRight") {
+    if (evt.code === "ArrowRight") {
       // console.log(currentIndex);
 
       // if (currentIndex === images.length - 1) {
@@ -70,9 +71,9 @@ function onImageClick(e) {
     }
   }
 
-  function OnArrowLeftPress(evt) {
+  function onArrowLeftPress(evt) {
     // setLefttBtnDataIndex(currentIndex);
-    if (evt.key === "ArrowLeft") {
+    if (evt.code === "ArrowLeft") {
       // console.log(currentIndex);
       image = document.querySelector(`img[data-index="${currentIndex - 1}"]`);
       setImageSrc(image);
@@ -83,13 +84,22 @@ function onImageClick(e) {
   }
 }
 
-function OnEscapePress(e) {
-  if (e.key === "Escape") {
+function onOverlayClick(e) {
+  if (e.target === e.currentTarget) {
+    onCloseModal();
+  }
+}
+
+function onEscapePress(e) {
+  const ESC_KEY_CODE = "Escape";
+
+  if (e.code === ESC_KEY_CODE) {
     onCloseModal();
   }
 }
 
 function onCloseModal() {
+  window.removeEventListener("keydown", onEscapePress);
   removeIsOpenClass();
   clearImageSrc();
   clearImageAlt();
