@@ -1,7 +1,6 @@
 //не знаю як позбутися помилок в консолі при перематовані стрілками крайніх картинок
 
 import images from "./gallery-items.js";
-console.log(images);
 const galleryContainer = document.querySelector(".js-gallery");
 const galleryModal = document.querySelector(".js-lightbox");
 const modalImg = document.querySelector(".lightbox__image");
@@ -66,8 +65,6 @@ function onImageClick(e) {
       image = document.querySelector(`img[data-index="${Number(currentIndex) + 1}"]`);
       setImageSrc(image);
       setImageAlt(image);
-
-      // console.log(image);
     }
   }
 
@@ -103,6 +100,7 @@ function onCloseModal() {
   removeIsOpenClass();
   clearImageSrc();
   clearImageAlt();
+  currentIndex = 0;
 }
 
 function setIsOpenClass() {
@@ -135,9 +133,9 @@ function removeIsOpenClass() {
 }
 
 function clearImageSrc() {
-  modalImg.src = "";
+  modalImg.src = "#";
 }
 
 function clearImageAlt() {
-  modalImg.alt = "";
+  modalImg.alt = "#";
 }
