@@ -50,10 +50,10 @@ function onImageClick(e) {
   }
 
   setIsOpenClass();
+  setModalDataIndex(image);
   setImageSrc(image);
   setImageAlt(image);
 
-  // console.log(currentIndex);
   function onArrowRightPress(evt) {
     // setRightBtnDataIndex(currentIndex);
     if (evt.code === "ArrowRight") {
@@ -62,22 +62,27 @@ function onImageClick(e) {
       // if (currentIndex === images.length - 1) {
       //   return;
       // }
-      image = document.querySelector(`img[data-index="${Number(currentIndex) + 1}"]`);
-      setImageSrc(image);
-      setImageAlt(image);
+      // currentIndex = image.dataset.index;
+      const currentImg = galleryContainer.querySelector(`img[data-index="${currentIndex}"]`);
+      const currentListItem = currentImg.closest(".gallery__item");
+      const nextListItem = currentListItem.nextElementSibling;
+      const nextImg = nextListItem.querySelector(".gallery__image");
+      // console.log(nextImg);
+      setNextDataIndex(nextImg);
+      setImageSrc(nextImg);
+      setImageAlt(nextImg);
     }
   }
 
   function onArrowLeftPress(evt) {
-    // setLefttBtnDataIndex(currentIndex);
-    if (evt.code === "ArrowLeft") {
-      // console.log(currentIndex);
-      image = document.querySelector(`img[data-index="${currentIndex - 1}"]`);
-      setImageSrc(image);
-      setImageAlt(image);
-
-      // console.log(image);
-    }
+    // // setLefttBtnDataIndex(currentIndex);
+    // if (evt.code === "ArrowLeft") {
+    //   // console.log(currentIndex);
+    //   image = document.querySelector(`img[data-index="${currentIndex - 1}"]`);
+    //   setImageSrc(image);
+    //   setImageAlt(image);
+    //   // console.log(image);
+    // }
   }
 }
 
@@ -100,15 +105,26 @@ function onCloseModal() {
   removeIsOpenClass();
   clearImageSrc();
   clearImageAlt();
-  currentIndex = 0;
+  // currentIndex = 0;
 }
 
 function setIsOpenClass() {
   galleryModal.classList.add("is-open");
 }
 
-function setImageSrc(image) {
+function setModalDataIndex(image) {
   currentIndex = image.dataset.index;
+  // console.log("assa");
+  modalImg.dataset.index = currentIndex;
+  // console.log(modalImg.dataset);
+}
+
+function setNextDataIndex(nextImg) {
+  nextImg.dataset.index = currentIndex;
+}
+
+function setImageSrc(image) {
+  // currentIndex = image.dataset.index;
   // setDataIndex(currentIndex);
 
   // if (currentIndex === 0 || currentIndex === images.length) {
