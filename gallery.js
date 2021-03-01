@@ -38,15 +38,16 @@ function createGalleryMarkup(images) {
 
 function onImageClick(e) {
   e.preventDefault();
+
+  if (!image.classList.contains("gallery__image")) {
+    return;
+  }
+
   let image = e.target;
 
   window.addEventListener("keyup", onEscapePress);
   document.addEventListener("keydown", onArrowLeftPress);
   document.addEventListener("keydown", onArrowRightPress);
-
-  if (!image.classList.contains("gallery__image")) {
-    return;
-  }
 
   setIsOpenClass();
   setModalDataIndex(image);
