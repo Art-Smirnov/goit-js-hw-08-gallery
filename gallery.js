@@ -40,7 +40,7 @@ function onImageClick(e) {
   e.preventDefault();
   let image = e.target;
 
-  window.addEventListener("keydown", onEscapePress);
+  window.addEventListener("keyup", onEscapePress);
   document.addEventListener("keydown", onArrowLeftPress);
   document.addEventListener("keydown", onArrowRightPress);
 
@@ -53,6 +53,7 @@ function onImageClick(e) {
   setImageSrc(image);
   setImageAlt(image);
 }
+
 function onArrowRightPress(evt) {
   if (evt.code === "ArrowRight") {
     const nextImg = galleryContainer.querySelector(`img[data-index="${(currentIndex += 1)}"]`);
@@ -77,6 +78,16 @@ function onArrowLeftPress(evt) {
   }
 }
 
+function onCloseModal() {
+  window.removeEventListener("keydown", onEscapePress);
+  window.removeEventListener("keydown", onArrowLeftPress);
+  window.removeEventListener("keydown", onArrowRightPress);
+  removeIsOpenClass();
+  clearImageSrc();
+  clearImageAlt();
+  modalImg.removeAttribute("data-index");
+}
+
 function onOverlayClick(e) {
   if (e.target === e.currentTarget) {
     onCloseModal();
@@ -89,16 +100,6 @@ function onEscapePress(e) {
   if (e.code === ESC_KEY_CODE) {
     onCloseModal();
   }
-}
-
-function onCloseModal() {
-  window.removeEventListener("keydown", onEscapePress);
-  window.removeEventListener("keydown", onArrowLeftPress);
-  window.removeEventListener("keydown", onArrowRightPress);
-  removeIsOpenClass();
-  clearImageSrc();
-  clearImageAlt();
-  modalImg.removeAttribute("data-index");
 }
 
 function setIsOpenClass() {
