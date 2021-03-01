@@ -39,11 +39,11 @@ function createGalleryMarkup(images) {
 function onImageClick(e) {
   e.preventDefault();
 
+  let image = e.target;
+
   if (!image.classList.contains("gallery__image")) {
     return;
   }
-
-  let image = e.target;
 
   window.addEventListener("keyup", onEscapePress);
   document.addEventListener("keydown", onArrowLeftPress);
