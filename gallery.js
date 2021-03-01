@@ -15,9 +15,10 @@ coseModalBtn.addEventListener("click", onCloseModal);
 overlay.addEventListener("click", onOverlayClick);
 
 function createGalleryMarkup(images) {
-  return images
-    .map(({ preview, original, description }, i) => {
-      return `<li class="gallery__item">
+  return images.reduce((acc, { preview, original, description }, i) => {
+    return (
+      acc +
+      `<li class="gallery__item">
       <a
         class="gallery__link"
         href="${original}"
@@ -30,9 +31,9 @@ function createGalleryMarkup(images) {
           data-index="${i}"
         />
       </a>
-    </li>`;
-    })
-    .join("");
+    </li>`
+    );
+  }, "");
 }
 
 function onImageClick(e) {
