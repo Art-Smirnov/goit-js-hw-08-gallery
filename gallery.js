@@ -7,6 +7,7 @@ const galleryModal = document.querySelector(".js-lightbox");
 const modalImg = document.querySelector(".lightbox__image");
 const coseModalBtn = document.querySelector('button[data-action="close-lightbox"]');
 const overlay = document.querySelector(".lightbox__overlay");
+
 const galleryMarkup = createGalleryMarkup(images);
 galleryContainer.innerHTML = galleryMarkup;
 
